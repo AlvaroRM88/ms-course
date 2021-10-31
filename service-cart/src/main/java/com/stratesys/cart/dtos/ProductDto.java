@@ -1,4 +1,4 @@
-package com.stratesys.shop.dtos;
+package com.stratesys.cart.dtos;
 
 import java.util.Date;
 import java.util.Objects;

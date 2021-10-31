@@ -1,10 +1,10 @@
-package com.stratesys.shop;
+package com.stratesys.cart;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ServiceShopApplicationTests {
+class ServiceCartApplicationTests {
 
 	@Test
 	void contextLoads() {

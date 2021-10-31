@@ -1,13 +1,13 @@
-package com.stratesys.shop;
+package com.stratesys.cart;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ServiceShopApplication {
+public class ServiceCartApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ServiceShopApplication.class, args);
+		SpringApplication.run(ServiceCartApplication.class, args);
 	}
 
 }

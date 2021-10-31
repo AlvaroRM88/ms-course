@@ -1,14 +1,14 @@
-package com.stratesys.shop.dtos;
+package com.stratesys.cart.dtos;
 
-public class ShoppingCartDto {
+public class CartDto {
 	
 	private ProductDto productDto;
 	private Integer amount;
 
-	public ShoppingCartDto() {
+	public CartDto() {
 	}
 
-	public ShoppingCartDto(ProductDto productDto, Integer amount) {
+	public CartDto(ProductDto productDto, Integer amount) {
 		this.productDto = productDto;
 		this.amount = amount;
 	}
