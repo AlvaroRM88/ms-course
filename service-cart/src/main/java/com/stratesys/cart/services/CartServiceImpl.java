@@ -15,13 +15,15 @@ import com.stratesys.cart.dtos.ProductDto;
 
 @Service("serviceRestTemplate")
 public class CartServiceImpl implements CartService {
-
+	
+	private static final String BASE_URL = "localhost:8001/product";
+	
 	@Autowired
 	private RestTemplate restTemplate;
 	
 	@Override
 	public List<CartDto> findAll() {
-		List<ProductDto> products = Arrays.asList(restTemplate.getForObject("http://service-product/product/all", ProductDto[].class));
+		List<ProductDto> products = Arrays.asList(restTemplate.getForObject("http://".concat(BASE_URL).concat("/all"), ProductDto[].class));
 		
 		return products.stream().map(product -> new CartDto(product, 1)).collect(Collectors.toList());
 	}
@@ -30,7 +32,7 @@ public class CartServiceImpl implements CartService {
 	public CartDto findById(Long id, Integer amount) {
 		Map<String, String> pathVariables = new HashMap<String, String>();
 		pathVariables.put("id", id.toString());
-		ProductDto product = restTemplate.getForObject("http://service-product/product/by/{id}", ProductDto.class, pathVariables);
+		ProductDto product = restTemplate.getForObject("http://".concat(BASE_URL).concat("/by/{id}"), ProductDto.class, pathVariables);
 		return new CartDto(product, amount);
 	}
 

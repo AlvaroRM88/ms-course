@@ -24,7 +24,7 @@ public class ProductController {
 	private ProductService productService;
 	
 	@GetMapping("/all")
-	public List<Product> listar(){
+	public List<Product> findAll(){
 		return productService.findAll().stream().map(product -> {
 			product.setPort(port);
 			return product;
@@ -32,7 +32,7 @@ public class ProductController {
 	}
 	
 	@GetMapping("/by/{id}")
-	public Product detalle(@PathVariable Long id) {
+	public Product findById(@PathVariable Long id) {
 		Product product = productService.findById(id);
 		if(product != null) {
 			product.setPort(port);
