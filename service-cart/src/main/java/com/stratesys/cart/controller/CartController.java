@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,9 @@ public class CartController {
 
 	@Value("${configuracion.prueba}")
 	private String test;
+	
+	@Autowired
+	private Environment environment;
 
 	@Autowired
 	@Qualifier("serviceFeign")
@@ -51,6 +55,11 @@ public class CartController {
 		Map<String, String> json = new HashMap<>();
 		json.put("config_test", test);
 		json.put("port", port);
+		
+		if(environment.getActiveProfiles().length>0 && environment.getActiveProfiles()[0].equals("dev")) {
+			json.put("autor.nombre", environment.getProperty("configuracion.autor.nombre"));
+		}
+
 		
 		return new ResponseEntity<Map<String, String>>(json, HttpStatus.OK);
 	}
