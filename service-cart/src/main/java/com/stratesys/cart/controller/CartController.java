@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.stratesys.cart.dtos.CartDto;
+import com.stratesys.cart.dtos.ProductDto;
 import com.stratesys.cart.services.CartService;
 
 @RestController
@@ -41,9 +43,20 @@ public class CartController {
 		return cartService.findAll();
 	}
 	
+	@HystrixCommand(fallbackMethod="findByIdError")
 	@GetMapping("/by/{id}/amount/{amount}")
 	public CartDto findById(@PathVariable Long id, @PathVariable Integer amount) {
 		return cartService.findById(id, amount);
+	}
+	
+	public CartDto findByIdError(Long id, Integer amount) {
+		ProductDto product = new ProductDto();
+		product.setNombre("Producto Hystrix");
+		product.setPrecio(1D);
+		CartDto cart = new CartDto();
+		cart.setAmount(0);
+		cart.setProductDto(product);
+		return cart;
 	}
 	
 	

@@ -33,6 +33,10 @@ public class ProductController {
 	
 	@GetMapping("/by/{id}")
 	public Product findById(@PathVariable Long id) {
+		
+		if(true) {
+			throw new RuntimeException("Simulated error: not product");
+		}
 		Product product = productService.findById(id);
 		if(product != null) {
 			product.setPort(port);
